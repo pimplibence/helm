@@ -2,7 +2,7 @@
     "name": "helm",
     "version": "0.0.1",
     "description": "",
-    "main": "src/index.ts",
+    "main": "./helm.js",
     "license": "MIT",
     "dependencies": {
         "@types/node": "^17.0.38",

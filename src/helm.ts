@@ -753,12 +753,3 @@ export class Helm {
         });
     }
 }
-
-(async () => {
-    const instance = new Helm();
-
-    console.log(await instance.template({
-        name: 'harbor',
-        chart: '/Users/pimplibence/Projects/SuperWebshopEcosystem/super-webshop-api-controller/charts/application-chart'
-    }));
-})();
