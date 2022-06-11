@@ -402,8 +402,21 @@ export class Helm {
     public async dependencyBuild(options: DependencyBuildOptions): Promise<void> {
         const args = [];
 
+        if (options?.keyring) {
+            args.push('--keyring');
+            args.push(options.keyring);
+        }
+
+        if (options?.skipRefresh) {
+            args.push('--skip-refresh');
+        }
+
+        if (options?.verify) {
+            args.push('--verify');
+        }
+
         return this.command.execute({
-            command: ['dependency', 'build'],
+            command: ['dependency', 'build', options.chart],
             output: 'none',
             args: args
         });
@@ -420,8 +433,21 @@ export class Helm {
     public async dependencyUpdate(options: DependencyUpdateOptions): Promise<void> {
         const args = [];
 
+        if (options?.keyring) {
+            args.push('--keyring');
+            args.push(options.keyring);
+        }
+
+        if (options?.skipRefresh) {
+            args.push('--skip-refresh');
+        }
+
+        if (options?.verify) {
+            args.push('--verify');
+        }
+
         return this.command.execute({
-            command: ['dependency', 'update'],
+            command: ['dependency', 'update', options.chart],
             output: 'none',
             args: args
         });
@@ -450,6 +476,11 @@ export class Helm {
     public async getHooks(options: GetHooksOptions): Promise<string> {
         const args = [];
 
+        if (options?.revision) {
+            args.push('--revision');
+            args.push(options.revision);
+        }
+
         return this.command.execute({
             command: ['get', 'hooks', options.releaseName],
             output: 'text',
@@ -459,6 +490,11 @@ export class Helm {
 
     public async getManifest(options: GetManifestOptions): Promise<string> {
         const args = [];
+
+        if (options?.revision) {
+            args.push('--revision');
+            args.push(options.revision);
+        }
 
         return this.command.execute({
             command: ['get', 'manifest', options.releaseName],
@@ -470,6 +506,11 @@ export class Helm {
     public async getNotes(options: GetNotesOptions): Promise<string> {
         const args = [];
 
+        if (options?.revision) {
+            args.push('--revision');
+            args.push(options.revision);
+        }
+
         return this.command.execute({
             command: ['get', 'notes', options.releaseName],
             output: 'text',
@@ -479,6 +520,11 @@ export class Helm {
 
     public async getValues(options: GetValuesOptions): Promise<any> {
         const args = [];
+
+        if (options?.revision) {
+            args.push('--revision');
+            args.push(options.revision);
+        }
 
         return this.command.execute({
             command: ['get', 'values', options.releaseName],
