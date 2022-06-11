@@ -1,6 +1,7 @@
 import { spawn } from 'child_process';
 import { HelmOptions } from '../helm';
 import { defaultExecutable } from './default-executable';
+import { HelmError } from './helm-error';
 
 export interface ExecuteOptions {
     command: string[];
@@ -42,7 +43,9 @@ export class Command {
 
             stream.on('close', () => {
                 if (!!stderr) {
-                    return reject(stderr);
+                    const error = new HelmError(stderr);
+
+                    return reject(error);
                 }
 
                 const output = this.getOutput(options.output, stdout);

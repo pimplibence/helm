@@ -38,36 +38,38 @@ export interface DependencyUpdateOptions {
 }
 
 export interface GetAllOptions {
-    name: string;
+    releaseName: string;
 }
 
 export interface GetHooksOptions {
-    name: string;
+    releaseName: string;
     revision?: number;
 }
 
 export interface GetNotesOptions {
-    name: string;
+    releaseName: string;
     revision?: number;
 }
 
 export interface GetManifestOptions {
-    name: string;
+    releaseName: string;
     revision?: number;
 }
 
 export interface GetValuesOptions {
-    name: string;
+    releaseName: string;
     all?: boolean;
     revision?: number;
 }
 
 export interface HistoryOptions {
-    name: string;
+    releaseName: string;
     max?: number;
 }
 
 export interface InstallOptions {
+    name: string;
+    chart: string;
     atomic?: boolean;
     caFile?: string;
     certFile?: string;
@@ -439,7 +441,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['get', 'all'],
+            command: ['get', 'all', options.releaseName],
             output: 'text',
             args: args
         });
@@ -449,7 +451,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['get', 'hooks'],
+            command: ['get', 'hooks', options.releaseName],
             output: 'text',
             args: args
         });
@@ -459,7 +461,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['get', 'manifest'],
+            command: ['get', 'manifest', options.releaseName],
             output: 'text',
             args: args
         });
@@ -469,7 +471,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['get', 'notes'],
+            command: ['get', 'notes', options.releaseName],
             output: 'text',
             args: args
         });
@@ -479,7 +481,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['get', 'values'],
+            command: ['get', 'values', options.releaseName],
             output: 'json',
             args: args
         });
@@ -489,7 +491,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['history'],
+            command: ['history', options.releaseName],
             output: 'json',
             args: args
         });
@@ -499,7 +501,7 @@ export class Helm {
         const args = [];
 
         return this.command.execute({
-            command: ['install'],
+            command: ['install', options.name, options.chart],
             output: 'none',
             args: args
         });
