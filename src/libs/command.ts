@@ -1,7 +1,10 @@
 import { spawn } from 'child_process';
-import { HelmOptions } from '../helm';
 import { defaultExecutable } from './default-executable';
 import { HelmError } from './helm-error';
+
+export interface CommandOptions {
+    executable?: string;
+}
 
 export interface ExecuteOptions {
     command: string[];
@@ -10,21 +13,19 @@ export interface ExecuteOptions {
 }
 
 export class Command {
-    private options: HelmOptions;
+    private options: CommandOptions;
 
-    public constructor(options: HelmOptions) {
+    public constructor(options: CommandOptions) {
         this.options = options;
     }
 
     public async execute(options: ExecuteOptions): Promise<any> {
         const command = options.command || [];
         const commandFlags = options.args || [];
-        const globalFlags = this.getGlobalFlags();
 
         const args = [
             ...command,
-            ...commandFlags,
-            ...globalFlags
+            ...commandFlags
         ];
 
         if (options.output === 'json') {
@@ -58,64 +59,6 @@ export class Command {
 
     private getExecutable() {
         return this.options?.executable || defaultExecutable();
-    }
-
-    private getGlobalFlags(): string[] {
-        const args: string[] = [];
-
-        if (this.options?.kubeApiServer) {
-            args.push('--kube-apiserver');
-            args.push(this.options?.kubeApiServer);
-        }
-
-        if (this.options?.kubeAsGroup && this.options?.kubeAsGroup?.length) {
-            for (const item of this.options?.kubeAsGroup) {
-                args.push('--kube-as-group');
-                args.push(item);
-            }
-        }
-
-        if (this.options?.kubeAsUser) {
-            args.push('--kube-as-user');
-            args.push(this.options?.kubeAsUser);
-        }
-
-        if (this.options?.kubeCaFile) {
-            args.push('--kube-ca-file');
-            args.push(this.options?.kubeCaFile);
-        }
-
-        if (this.options?.kubeContext) {
-            args.push('--kube-context');
-            args.push(this.options?.kubeContext);
-        }
-
-        if (this.options?.kubeToken) {
-            args.push('--kube-token');
-            args.push(this.options?.kubeToken);
-        }
-
-        if (this.options?.kubeConfig) {
-            args.push('--kubeconfig');
-            args.push(this.options?.kubeConfig);
-        }
-
-        if (this.options?.namespace) {
-            args.push('--namespace');
-            args.push(this.options?.namespace);
-        }
-
-        if (this.options?.registryConfig) {
-            args.push('--registry-config');
-            args.push(this.options?.registryConfig);
-        }
-
-        if (this.options?.repositoryCache) {
-            args.push('--repository-cache');
-            args.push(this.options?.repositoryCache);
-        }
-
-        return args;
     }
 
     private getOutput(type: string, value: string) {
