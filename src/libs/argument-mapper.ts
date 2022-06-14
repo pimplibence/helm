@@ -1,4 +1,4 @@
-import { GlobalArgsOptions, GlobalOptionsMap, mergeGlobalArgsOptions } from '../interfaces/global-options';
+import { GlobalArgsOptions, GlobalOptionsMap, mergeGlobalArgsOptions } from '../interfaces/v3.9.0/global-options';
 
 export class ArgumentMap<CommandOptions, ArgsOptions> {
     command: Record<keyof CommandOptions, 'string' | 'stringArray'>;
