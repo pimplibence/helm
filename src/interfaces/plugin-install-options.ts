@@ -8,7 +8,7 @@ export interface PluginInstallArgsOptions {
     version?: string;
 }
 
-export const PackageInstallOptionsMap: ArgumentMap<PluginInstallCommandOptions, PluginInstallArgsOptions> = {
+export const PluginInstallOptionsMap: ArgumentMap<PluginInstallCommandOptions, PluginInstallArgsOptions> = {
     command: {
         urlOrPath: 'string'
     },

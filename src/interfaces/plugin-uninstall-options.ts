@@ -4,7 +4,7 @@ export interface PluginUninstallCommandOptions {
     plugin: string;
 }
 
-export const PackageUninstallOptionsMap: ArgumentMap<PluginUninstallCommandOptions, {}> = {
+export const PluginUninstallOptionsMap: ArgumentMap<PluginUninstallCommandOptions, {}> = {
     command: {
         plugin: 'string'
     },

@@ -1,4 +1,4 @@
-import { GlobalOptionsMap } from '../interfaces/global-options';
+import { GlobalArgsOptions, GlobalOptionsMap, mergeGlobalArgsOptions } from '../interfaces/global-options';
 
 export class ArgumentMap<CommandOptions, ArgsOptions> {
     command: Record<keyof CommandOptions, 'string' | 'stringArray'>;
@@ -6,12 +6,18 @@ export class ArgumentMap<CommandOptions, ArgsOptions> {
 }
 
 export class ArgumentMapper<CommandOptions, ArgsOptions> {
-    private options: CommandOptions & ArgsOptions;
+    private options: CommandOptions & ArgsOptions & GlobalArgsOptions;
     private map: ArgumentMap<CommandOptions, ArgsOptions>;
 
-    constructor(options: CommandOptions & ArgsOptions, map: ArgumentMap<CommandOptions, ArgsOptions>) {
-        this.options = options;
-        this.map = { ...GlobalOptionsMap.args, ...map };
+    constructor(globalOptions: GlobalArgsOptions, options: CommandOptions & ArgsOptions, map: ArgumentMap<CommandOptions, ArgsOptions>) {
+        this.options = mergeGlobalArgsOptions(globalOptions, options);
+
+        map.args = {
+            ...GlobalOptionsMap.args,
+            ...map.args
+        };
+
+        this.map = map;
     }
 
     public command(): string[] {
@@ -26,7 +32,11 @@ export class ArgumentMapper<CommandOptions, ArgsOptions> {
                     args.push(value);
                     break;
                 case 'stringArray':
-                    args.push(...value);
+                    for (const item of value) {
+                        if (!!item) {
+                            args.push(item);
+                        }
+                    }
                     break;
             }
         }
@@ -50,10 +60,10 @@ export class ArgumentMapper<CommandOptions, ArgsOptions> {
                     }
                     break;
                 case 'stringArray':
-                    for (const item of value) {
+                    for (const item of value || []) {
                         if (!!item) {
                             args.push(`--${aKey}`);
-                            args.push(value);
+                            args.push(item);
                         }
                     }
                     break;
@@ -64,7 +74,7 @@ export class ArgumentMapper<CommandOptions, ArgsOptions> {
                     }
                     break;
                 case 'numberArray':
-                    for (const item of value) {
+                    for (const item of value || []) {
                         if (value !== undefined) {
                             args.push(`--${aKey}`);
                             args.push(item);

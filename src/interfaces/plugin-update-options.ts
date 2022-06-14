@@ -4,7 +4,7 @@ export interface PluginUpdateCommandOptions {
     plugin: string;
 }
 
-export const PackageUpdateOptionsMap: ArgumentMap<PluginUpdateCommandOptions, {}> = {
+export const PluginUpdateOptionsMap: ArgumentMap<PluginUpdateCommandOptions, {}> = {
     command: {
         plugin: 'string'
     },

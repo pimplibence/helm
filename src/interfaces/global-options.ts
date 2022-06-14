@@ -17,7 +17,7 @@ export const GlobalOptionsMap: ArgumentMap<{}, GlobalArgsOptions> = {
     command: [],
     args: {
         kubeApiServer: ['kube-apiserver', 'string'],
-        kubeAsGroup: ['kube-as-group', 'string'],
+        kubeAsGroup: ['kube-as-group', 'stringArray'],
         kubeAsUser: ['kube-as-user', 'string'],
         kubeCaFile: ['kube-ca-file', 'string'],
         kubeContext: ['kube-context', 'string'],
@@ -28,3 +28,12 @@ export const GlobalOptionsMap: ArgumentMap<{}, GlobalArgsOptions> = {
         repositoryCache: ['repository-cache', 'string'],
     }
 };
+
+export const mergeGlobalArgsOptions = (left: GlobalArgsOptions, right: any): any => ({
+    ...left,
+    ...right,
+    kubeAsGroup: [
+        ...left.kubeAsGroup || [],
+        ...right.kubeAsGroup || [],
+    ]
+});

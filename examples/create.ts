@@ -1,9 +1,12 @@
 import { Helm } from '../src/helm';
 
-const helm = new Helm({});
+const helm = new Helm({
+    namespace: 'example-namespace'
+});
 
-helm.create({
-    name: 'example-chart',
-    namespace: 'example-chart',
-    starter: 'asfasf'
+helm.install({
+    name: 'example-things',
+    chart: 'mongodb',
+    repo: 'https://charts.bitnami.com/bitnami',
+    createNamespace: true
 }).then(console.log);
