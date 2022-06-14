@@ -41,12 +41,15 @@ import { Command, CommandOptions } from './libs/command';
  * Helm Version: version.BuildInfo{Version:"v3.9.0", GitCommit:"7ceeda6c585217a19a1131663d8cd1f7d641b2a7", GitTreeState:"clean", GoVersion:"go1.18.2"}
  */
 export class Helm_v3_9_0 {
+    public supportedVersion = ['v3.9.0'];
     public command: Command;
     public options: GlobalArgsOptions;
 
     constructor(options?: GlobalArgsOptions & CommandOptions) {
         this.options = options;
         this.command = new Command(options);
+
+        this.notifyIsHelmVersionSupported();
     }
 
     public async create(options: CreateCommandOptions & CreateArgsOptions & GlobalArgsOptions): Promise<void> {
@@ -432,4 +435,16 @@ export class Helm_v3_9_0 {
             args: mapper.args()
         });
     }
+
+    protected async notifyIsHelmVersionSupported() {
+        const helmVersion = await this.version({ template: '{{ .Version }}' });
+        const isSupported = this.supportedVersion.includes(helmVersion);
+
+        if (!isSupported) {
+            console.warn('WARNING! Unsupported Helm version!');
+            console.warn(`- Current version: ${helmVersion}`);
+            console.warn(`- Supported versions: ${this.supportedVersion.join(', ')}`);
+        }
+    }
 }
+

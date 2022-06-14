@@ -33,7 +33,7 @@ export const mergeGlobalArgsOptions = (left: GlobalArgsOptions, right: any): any
     ...left,
     ...right,
     kubeAsGroup: [
-        ...left.kubeAsGroup || [],
-        ...right.kubeAsGroup || [],
+        ...left?.kubeAsGroup || [],
+        ...right?.kubeAsGroup || [],
     ]
 });

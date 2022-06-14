@@ -8,7 +8,7 @@ export interface VersionArgsOptions {
 export const VersionOptionsMap: ArgumentMap<{}, VersionArgsOptions> = {
     command: {},
     args: {
-        short: ['keyring', 'boolean'],
-        template: ['keyring', 'string']
+        short: ['short', 'boolean'],
+        template: ['template', 'string']
     }
 };
