@@ -1,6 +1,6 @@
 {
     "name": "@kifly/helm",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "main": "./helm.js",
     "license": "MIT",

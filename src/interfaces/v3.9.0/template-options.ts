@@ -12,7 +12,7 @@ export interface TemplateArgsOptions {
     certFile?: string;
     createNamespace?: boolean;
     dependencyUpdate?: boolean;
-    descriptions?: string;
+    description?: string;
     disableOpenapiValidation?: boolean;
     dryRun?: boolean;
     generateName?: boolean;
@@ -61,7 +61,7 @@ export const TemplateOptionsMap: ArgumentMap<TemplateCommandOptions, TemplateArg
         certFile: ['cert-file', 'string'],
         createNamespace: ['create-namespace', 'boolean'],
         dependencyUpdate: ['dependency-update', 'boolean'],
-        descriptions: ['descriptions', 'string'],
+        description: ['description', 'string'],
         disableOpenapiValidation: ['disable-openapi-validation', 'boolean'],
         dryRun: ['dry-run', 'boolean'],
         generateName: ['generate-name', 'boolean'],

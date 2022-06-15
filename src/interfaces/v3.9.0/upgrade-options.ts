@@ -12,7 +12,7 @@ export interface UpgradeArgsOptions {
     cleanupOnFail?: boolean;
     createNamespace?: boolean;
     dependencyUpdate?: boolean;
-    descriptions?: string;
+    description?: string;
     disableOpenapiValidation?: boolean;
     dryRun?: boolean;
     force?: boolean;
@@ -54,7 +54,7 @@ export const UpgradeOptionsMap: ArgumentMap<UpgradeCommandOptions, UpgradeArgsOp
         certFile: ['cert-file', 'string'],
         createNamespace: ['create-namespace', 'boolean'],
         dependencyUpdate: ['dependency-update', 'boolean'],
-        descriptions: ['descriptions', 'string'],
+        description: ['description', 'string'],
         disableOpenapiValidation: ['disable-openapi-validation', 'boolean'],
         dryRun: ['dry-run', 'boolean'],
         insecureSkipTlsVerify: ['insecure-skip-tls-verify', 'boolean'],
