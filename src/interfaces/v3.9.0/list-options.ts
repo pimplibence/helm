@@ -2,7 +2,7 @@ import { ArgumentMap } from '../../libs/argument-mapper';
 
 export interface ListArgsOptions {
     all?: boolean;
-    allNamesapces?: boolean;
+    allNamespaces?: boolean;
     date?: boolean;
     deployed?: boolean;
     failed?: boolean;
@@ -22,7 +22,7 @@ export const ListOptionsMap: ArgumentMap<{}, ListArgsOptions> = {
     command: {},
     args: {
         all: ['all', 'boolean'],
-        allNamesapces: ['all-namesapces', 'boolean'],
+        allNamespaces: ['all-namespaces', 'boolean'],
         date: ['date', 'boolean'],
         deployed: ['deployed', 'boolean'],
         failed: ['failed', 'boolean'],
