@@ -38,7 +38,7 @@ import { ArgumentMapper } from './libs/argument-mapper';
 import { Command, CommandOptions } from './libs/command';
 
 export class Helm_v3_9_0 {
-    public supportedVersion = ['v3.9.0', 'v3.9.1'];
+    public supportedVersion = ['v3.9.0', 'v3.9.1', 'v3.9.2', 'v3.9.3', 'v3.9.4'];
     public command: Command;
     public options: GlobalArgsOptions;
 
